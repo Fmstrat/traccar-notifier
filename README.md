@@ -26,17 +26,28 @@ docker run \
 
 You will now have a config file like the following, edit the file to your liking, for instance:
 ``` yml
-pushover:
-  enabled: true
-  user: fdfa903af04gjdfkadsf93fafjfie9
-  token: kafaaf9390efaffslepea09dsf9fkf
+notifiers:
 
-telegram:
-  enabled: true
-  chat_id: 999999999
-  token: 999999999:Afifefaadoieoaaa_aefFEFFDfjadfkaeee
+  pushover:
+    enabled: true
+    user: fdfa903af04gjdfkadsf93fafjfie9
+    token: kafaaf9390efaffslepea09dsf9fkf
+
+  telegram:
+    enabled: true
+    chat_id: 999999999
+    token: 999999999:Afifefaadoieoaaa_aefFEFFDfjadfkaeee
+
+ignore:
 ```
 You can enable more than one notifier, and all that are enabled will fire.
+
+You could also have it ignore any notifications that have a specific string in the title, such as:
+```
+ignore:
+  - Device Online
+  - Device Unknown
+```
 
 Lastly, use the following `docker-compose.yml` file for launching:
 ```

@@ -26,26 +26,40 @@ app.post('/api/v1', (req, res) => {
 	} else {
 		title = `Traccar - ${data.device.name} - ${eventType}`
 	}
-	if ("attributes" in data.event) {
-		for (var i in data.event.attributes) {
-		    if (data.event.attributes.hasOwnProperty(i)) {
-			body += mkSentence(i) + ": " + mkSentence(data.event.attributes[i]) + "\r\n"
-		    }
+	var ignore = false;
+	if (config.ignore) {
+		for (var i = 0; i < config.ignore.length; i++) {
+			if (title.includes(config.ignore[i])) {
+				ignore = true;
+				break;
+			}
 		}
 	}
-	if (data.event.positionId != 0) {
-		body += `https://www.google.com/maps/search/?api=1&query=${data.position.latitude},${data.position.longitude}`
-	}
-	if (body == "") {
-		body = "Traccar Report."
-	}
-	Object.keys(config).forEach(function(key) {
-		if (config[key].enabled) {
-			data.type = key;
-			console.log(JSON.stringify(data));
-			module.exports[key](title, body, config[key]);
+	if (!ignore) {
+		if ("attributes" in data.event) {
+			for (var i in data.event.attributes) {
+			    if (data.event.attributes.hasOwnProperty(i)) {
+				body += mkSentence(i) + ": " + mkSentence(data.event.attributes[i]) + "\r\n"
+			    }
+			}
 		}
-	});
+		if (data.event.positionId != 0) {
+			body += `https://www.google.com/maps/search/?api=1&query=${data.position.latitude},${data.position.longitude}`
+		}
+		if (body == "") {
+			body = "Traccar Report."
+		}
+		Object.keys(config.notifiers).forEach(function(key) {
+			if (config.notifiers[key].enabled) {
+				data.type = key;
+				console.log(JSON.stringify(data));
+				module.exports[key](title, body, config.notifiers[key]);
+			}
+		});
+	} else {
+		data.ignore = true;
+		console.log(JSON.stringify(data));
+	}
 	res.send('received\r\n');
 })
 

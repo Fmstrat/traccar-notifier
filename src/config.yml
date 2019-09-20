@@ -1,9 +1,13 @@
-pushover:
-  enabled: false
-  user: 
-  token: 
+notifiers:
 
-telegram:
-  enabled: false
-  chat_id:
-  token:
+  pushover:
+    enabled: false
+    user: 
+    token: 
+
+  telegram:
+    enabled: false
+    chat_id:
+    token:
+
+ignore:
