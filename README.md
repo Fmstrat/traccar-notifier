@@ -43,7 +43,7 @@ ignore:
 You can enable more than one notifier, and all that are enabled will fire.
 
 You could also have it ignore any notifications that have a specific string in the title, such as:
-```
+``` yml
 ignore:
   - Device Online
   - Device Unknown
