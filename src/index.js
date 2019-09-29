@@ -19,6 +19,7 @@ const config = yaml.readSync('config.yml')
 app.post('/api/v1', (req, res) => {
 	var data = req.body;
 	var title = "";
+	var lastTitle = "";
 	var body = "";
 	var eventType = mkSentence(data.event.type);
 	if (data.event.geofenceId != 0) {
@@ -52,8 +53,14 @@ app.post('/api/v1', (req, res) => {
 		Object.keys(config.notifiers).forEach(function(key) {
 			if (config.notifiers[key].enabled) {
 				data.type = key;
+				if (title == lastTitle)
+					data.duplicate = true;
 				console.log(JSON.stringify(data));
-				module.exports[key](title, body, config.notifiers[key]);
+				if (title != lastTitle) {
+					lastTitle = title;
+					setTimeout(function() { lastTitle = ""; }, 5000);
+					module.exports[key](title, body, config.notifiers[key]);
+				}
 			}
 		});
 	} else {
