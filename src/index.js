@@ -4,19 +4,65 @@ const yaml = require('node-yaml')
 const mkSentence = require('./lib/mk-sentence')
 const app = express()
 const bodyParser = require('body-parser')
+const sentenceCase = require('sentence-case')
 const port = 3080
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({	extended: true }));
+app.set('view engine', 'pug')
+app.use(express.static('public'));
+
+function checkToken(_token) {
+	var token = ""
+	if (config.token) token = config.token;
+	if (!token || _token == token)
+		return true;
+	else
+		return false;
+}
 
 require('fs').readdirSync(path.join(__dirname, 'notifiers')).forEach(function (file) {
 	const name = path.basename(file, '.js')
 	module.exports[name] = require(path.join(__dirname, 'notifiers', file));
 });
 
-const config = yaml.readSync('config.yml')
+var config;
+
+app.get('/', (req, res) => {
+	if (!checkToken(req.query.token)) { res.send('failed token\r\n'); return; };
+	var notifiers = Object.keys(config.notifiers);
+	var buttons = [];
+	for (var i = 0; i < notifiers.length; i++) {
+		buttons.push({
+			"name": notifiers[i],
+			"displayName": sentenceCase(notifiers[i]),
+			"enabled": config.notifiers[notifiers[i]].enabled
+		});
+	}
+	res.render('_notifiers', {
+		title: 'Notifiers',
+		message: req.query.message,
+		token: config.token,
+		buttons: buttons
+	})
+});
+
+app.post('/', async (req, res) => {
+	if (!checkToken(req.query.token)) { res.send('failed token\r\n'); return; };
+	var notifiers = Object.keys(config.notifiers);
+	for (var i = 0; i < notifiers.length; i++) {
+		config.notifiers[notifiers[i]].enabled = false;
+	}
+	notifiers = Object.keys(req.body);
+	for (var i = 0; i < notifiers.length; i++) {
+		if (req.body[notifiers[i]] == "true")
+			config.notifiers[notifiers[i]].enabled = true;
+	}
+	res.redirect("/?message=Changes saved.&token="+config.token);
+});
 
 app.post('/api/v1', (req, res) => {
+	if (!checkToken(req.query.token)) { res.send('failed token\r\n'); return; };
 	var data = req.body;
 	var title = "";
 	var lastTitle = "";
@@ -70,7 +116,8 @@ app.post('/api/v1', (req, res) => {
 	res.send('received\r\n');
 })
 
-app.listen(port, (err) => {
+app.listen(port, async (err) => {
+ 	config = await yaml.readSync('config.yml')
 	if (err) {
 		return console.error("ERROR", err)
 	}

@@ -1,0 +1,14 @@
+extends ../node_modules/pug-bootstrap/_bootstrap
+
+append head
+	meta(name="apple-mobile-web-app-title", content="Traccar Notifications")
+	meta(name="apple-mobile-web-app-capable", content="yes")
+	meta(name="apple-mobile-web-app-status-bar-style", content="black")
+append scripts
+	script(src='../js/_custom.js')
+append styles
+	link(href='../css/starter-template.css', rel='stylesheet')
+	link(href='../css/_custom.css', rel='stylesheet')
+block body
+	+navbar-fixed("Traccar Notifier","navbar","inverse")
+		+nav_item("/?token="+token,(title === 'Notifiers' ? "active" : undefined)) Notifiers

@@ -1,0 +1,31 @@
+extends _bootstrap
+
+append body
+  .container
+    h1=title
+    p=message
+    form(method='POST', action='/?token='+token)
+      each button in buttons
+        if button.enabled
+          .btn-group(data-toggle="buttons")
+            label.btn.active(class="btn-default")
+              input(type="radio",name=button.name,autocomplete="off",value="true",checked) 
+              |  enabled
+            label.btn(class="btn-default")
+              input(type="radio",name=button.name,autocomplete="off",value="false") 
+              |  disabled
+        else
+          .btn-group(data-toggle="buttons")
+            label.btn(class="btn-default")
+              input(type="radio",name=button.name,autocomplete="off",value="true") 
+              |  enabled
+            label.btn.active(class="btn-default")
+              input(type="radio",name=button.name,autocomplete="off",value="false",checked) 
+              |  disabled
+        label(for=button.name, style="padding: 10px")=button.displayName
+        p
+      br
+      p
+        +submit-primary("Save")
+      p
+        +a-btn-primary("/?token="+token) Cancel

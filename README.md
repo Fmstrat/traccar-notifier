@@ -6,6 +6,8 @@ Currently supported platforms:
 - Pushover
 - Telegram
 
+<img src="screenshots/1.jpg" border=1 width=300>
+
 ## Usage
 
 To use Traccar Notifier, include the following two lines in your `traccar.xml` file after using the directions from https://hub.docker.com/r/traccar/traccar:
@@ -39,6 +41,8 @@ notifiers:
     token: 999999999:Afifefaadoieoaaa_aefFEFFDfjadfkaeee
 
 ignore:
+
+token:
 ```
 You can enable more than one notifier, and all that are enabled will fire.
 
@@ -47,6 +51,11 @@ You could also have it ignore any notifications that have a specific string in t
 ignore:
   - Device Online
   - Device Unknown
+```
+
+You can also enable a token required on the query string for accessing the system, then access the system via `http://traccar-notifier:3080/api/v1?token=THISISMYTOKEN`
+``` yml
+token: THISISMYTOKEN
 ```
 
 Lastly, use the following `docker-compose.yml` file for launching:
@@ -77,6 +86,11 @@ services:
       - ./traccar-notifier/config.yml:/app/config.yml:ro
     restart: always
 ```
+
+## Altering configuration via the web
+After the system is deployed, you can enable/disable notifiers from `http://traccar-notifier:3080/` via a web browser. This does not change the configuration on disk, just what is in memory.
+
+It is highly recommended to proxy behind SSL with `nginx` or `traefik`.
 
 ## Usage outside of Docker
 If you wish to use Traccar Notifier outside of docker, then go into the `src` folder, update the `config.yml` then run:
