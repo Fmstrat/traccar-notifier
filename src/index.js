@@ -21,12 +21,23 @@ function checkToken(_token) {
 		return false;
 }
 
+function resetLastTitle() {
+	if (lastTitleCount > 0) {
+		lastTitleCount--;
+	}
+	if (lastTitleCount == 0) {
+		lastTitle = "";
+	}
+}
+
 require('fs').readdirSync(path.join(__dirname, 'notifiers')).forEach(function (file) {
 	const name = path.basename(file, '.js')
 	module.exports[name] = require(path.join(__dirname, 'notifiers', file));
 });
 
 var config;
+var lastTitle = "";
+var lastTitleCount = 0;
 
 app.get('/', (req, res) => {
 	if (!checkToken(req.query.token)) { res.send('failed token\r\n'); return; };
@@ -65,7 +76,6 @@ app.post('/api/v1', (req, res) => {
 	if (!checkToken(req.query.token)) { res.send('failed token\r\n'); return; };
 	var data = req.body;
 	var title = "";
-	var lastTitle = "";
 	var body = "";
 	var eventType = mkSentence(data.event.type);
 	if (data.event.geofenceId != 0) {
@@ -104,7 +114,8 @@ app.post('/api/v1', (req, res) => {
 				console.log(JSON.stringify(data));
 				if (title != lastTitle) {
 					lastTitle = title;
-					setTimeout(function() { lastTitle = ""; }, 5000);
+					lastTitleCount++;
+					setTimeout(resetLastTitle, 5000);
 					module.exports[key](title, body, config.notifiers[key]);
 				}
 			}
