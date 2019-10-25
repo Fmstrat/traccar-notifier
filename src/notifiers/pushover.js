@@ -14,7 +14,7 @@ module.exports = (function (title, body, config) {
 	}
 	p.send(msg, function(err, result) {
 		if (err) {
-			console.err(err);
+			console.error(err);
 		}
 	});
 });
