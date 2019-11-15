@@ -10,7 +10,7 @@ module.exports = (function (title, body, config) {
 		title: title,
 		sound: 'magic',
 		device: 'traccar',
-		priority: 1
+		priority: 0
 	}
 	p.send(msg, function(err, result) {
 		if (err) {
