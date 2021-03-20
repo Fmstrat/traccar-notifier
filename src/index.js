@@ -115,7 +115,7 @@ app.post('/api/v1', (req, res) => {
 				if (title != lastTitle) {
 					lastTitle = title;
 					lastTitleCount++;
-					setTimeout(resetLastTitle, 5000);
+					setTimeout(resetLastTitle, 10000);
 					module.exports[key](title, body, config.notifiers[key]);
 				}
 			}
