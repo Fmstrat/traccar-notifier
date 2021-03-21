@@ -8,7 +8,7 @@ module.exports = (function (title, body, config) {
 	var msg = {
 		message: body,
 		title: title,
-		sound: 'magic',
+		sound: 'intermission',
 		device: 'traccar',
 		priority: 0
 	}
