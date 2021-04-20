@@ -15,7 +15,7 @@
     "js-yaml": "^3.14.1",
     "node-yaml": "^4.0.1",
     "nodemon": "^1.19.4",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-bootstrap": "0.0.16",
     "pushover-notifications": "^1.2.2",
     "sentence-case": "^2.1.1",
