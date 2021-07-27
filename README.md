@@ -5,6 +5,7 @@ Traccar Notifier is a node app/docker container to enable push notifications fro
 Currently supported platforms:
 - Pushover
 - Telegram
+- Twilio
 
 <img src="screenshots/1.jpg" border=1 width=300>
 
