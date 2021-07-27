@@ -22,7 +22,15 @@ notifiers:
     username: 
     avatar_url: 
     webhook_url: 
-
+    
+  email:
+    enabled: 
+    port: 
+    host: 
+    auth_user: 
+    auth_pass: 
+    dest_email: 
+    
 ignore:
 
 token:

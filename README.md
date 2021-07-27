@@ -7,6 +7,7 @@ Currently supported platforms:
 - Telegram
 - Twilio
 - Discord Webhooks
+- Email
 
 <img src="screenshots/1.jpg" border=1 width=300>
 
@@ -55,6 +56,14 @@ notifiers:
     avatar_url: https://pbs.twimg.com/profile_images/1171753326691717120/lsyv3aU9_400x400.jpg
     webhook_url: https://ptb.discord.com/api/webhooks/8694253322880/PI0V1-8
     
+  email:
+    enabled: true
+    port: 587
+    host: mail.example.com
+    auth_user: conni@example.com
+    auth_pass: Password
+    dest_email: conni@example.com
+
 ignore:
 
 token:
