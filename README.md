@@ -6,6 +6,7 @@ Currently supported platforms:
 - Pushover
 - Telegram
 - Twilio
+- Discord Webhooks
 
 <img src="screenshots/1.jpg" border=1 width=300>
 
@@ -48,6 +49,12 @@ notifiers:
     authToken: BuiBiuoBiubiuB
     senderNumber: +1235522455224
 
+  discord:
+    enabled: true
+    username: Test
+    avatar_url: https://pbs.twimg.com/profile_images/1171753326691717120/lsyv3aU9_400x400.jpg
+    webhook_url: https://ptb.discord.com/api/webhooks/8694253322880/PI0V1-8
+    
 ignore:
 
 token:

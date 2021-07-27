@@ -10,4 +10,3 @@ module.exports = (function (title, body, config) {
 	})
 	.then((message) => console.log("Message SID:", message.sid));
 });
-

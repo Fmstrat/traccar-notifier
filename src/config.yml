@@ -17,6 +17,12 @@ notifiers:
     authToken: 
     senderNumber: 
 
+  discord:
+    enabled: false
+    username: 
+    avatar_url: 
+    webhook_url: 
+
 ignore:
 
 token:
