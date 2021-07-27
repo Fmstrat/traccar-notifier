@@ -10,6 +10,13 @@ notifiers:
     chat_id:
     token:
 
+  twilio:
+    enabled: false
+    accountSid: 
+    notif_number: 
+    authToken: 
+    senderNumber: 
+
 ignore:
 
 token:

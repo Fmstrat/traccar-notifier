@@ -40,6 +40,13 @@ notifiers:
     chat_id: 999999999
     token: 999999999:Afifefaadoieoaaa_aefFEFFDfjadfkaeee
 
+  twilio:
+    enabled: true
+    accountSid: YBy8uGVuyvuiuyVIuVuyvuiV
+    notif_number: +4578467423124
+    authToken: BuiBiuoBiubiuB
+    senderNumber: +1235522455224
+
 ignore:
 
 token:
