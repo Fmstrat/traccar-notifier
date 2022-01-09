@@ -2,6 +2,7 @@ notifiers:
 
   pushover:
     enabled: false
+    send_lowest_priority_on_disabled: false
     user: 
     token: 
 

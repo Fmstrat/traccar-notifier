@@ -5,12 +5,15 @@ module.exports = (function (title, body, config) {
 		user: config.user,
 		token: config.token
 	});
+	var priority = 0;
+	if (!config.enabled)
+		priority = -2;
 	var msg = {
 		message: body,
 		title: title,
 		sound: 'intermission',
 		device: 'traccar',
-		priority: 0
+		priority: priority
 	}
 	p.send(msg, function(err, result) {
 		if (err) {

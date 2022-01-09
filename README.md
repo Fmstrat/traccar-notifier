@@ -32,6 +32,7 @@ notifiers:
 
   pushover:
     enabled: true
+    send_lowest_priority_on_disabled: false
     user: fdfa903af04gjdfkadsf93fafjfie9
     token: kafaaf9390efaffslepea09dsf9fkf
 

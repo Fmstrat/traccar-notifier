@@ -107,7 +107,7 @@ app.post('/api/v1', (req, res) => {
 			body = "Traccar Report."
 		}
 		Object.keys(config.notifiers).forEach(function(key) {
-			if (config.notifiers[key].enabled) {
+			if (config.notifiers[key].enabled || config.notifiers[key].send_lowest_priority_on_disabled) {
 				data.type = key;
 				if (title == lastTitle)
 					data.duplicate = true;
