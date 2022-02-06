@@ -5,6 +5,9 @@ Traccar Notifier is a node app/docker container to enable push notifications fro
 Currently supported platforms:
 - Pushover
 - Telegram
+- Twilio
+- Discord Webhooks
+- Email
 
 <img src="screenshots/1.jpg" border=1 width=300>
 
@@ -40,6 +43,27 @@ notifiers:
     enabled: true
     chat_id: 999999999
     token: 999999999:Afifefaadoieoaaa_aefFEFFDfjadfkaeee
+
+  twilio:
+    enabled: true
+    accountSid: YBy8uGVuyvuiuyVIuVuyvuiV
+    notif_number: +4578467423124
+    authToken: BuiBiuoBiubiuB
+    senderNumber: +1235522455224
+
+  discord:
+    enabled: true
+    username: Test
+    avatar_url: https://pbs.twimg.com/profile_images/1171753326691717120/lsyv3aU9_400x400.jpg
+    webhook_url: https://ptb.discord.com/api/webhooks/8694253322880/PI0V1-8
+    
+  email:
+    enabled: true
+    port: 587
+    host: mail.example.com
+    auth_user: conni@example.com
+    auth_pass: Password
+    dest_email: conni@example.com
 
 ignore:
 
